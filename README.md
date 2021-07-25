@@ -1,11 +1,17 @@
 Just playing around with some LED effects for use on WS2812 circles/rings.  
 Kinda haphazard, not particularly good, but still a bit of fun.
 
-So far it's pretty much just simple wipes and gradients -- basic but alright.  
-Might try to add some cool stuff with noise later.
+So far it implements some simple wipes, gradients, and time-based animation of
+Perlin's improved noise (FastLED noise func). Overall it's pretty basic but
+alright enough.  
+Performance seems like it can suffer in the more taxing effects, but using a
+relatively fast microcontroller like Teensy 3.x or Raspberry Pi Pico should
+make it handle pretty much everything decently. There's quite a few easy
+optimisation opportunities that should get it running well on weaker devices,
+if anyone is so inclined.
 
 Uses Arduino IDE+FastLED, and unlike common convention assumes the "strip"
-starts at the centre of the circle (this is subject to change).
+starts at the centre of the circle. (this is subject to change)
 
 Works alright on the Wokwi simulator.
 
