@@ -26,27 +26,28 @@ CircleWipeReversed defaultCircleWipeReversed = CircleWipeReversed();
 #include "Gradient.h"
 Gradient defaultGradient = Gradient(5000, 1);
 
-PolarLedEffect::SingleColourPolarData redPolarData = {CHSV(HUE_RED, 255, 255), FIRST_POLAR_RING, LAST_POLAR_RING};
-PolarLedEffect::SingleColourPolarData greenPolarData = {CHSV(HUE_GREEN, 255, 255), FIRST_POLAR_RING, LAST_POLAR_RING};
-PolarLedEffect::SingleColourPolarData bluePolarData = {CHSV(HUE_BLUE, 255, 255), FIRST_POLAR_RING, LAST_POLAR_RING};
-PolarLedEffect::SingleColourPolarData blackPolarData = {CHSV(0, 0, 0), FIRST_POLAR_RING, LAST_POLAR_RING};
-PolarLedEffect::SingleColourPolarData whitePolarData = {CHSV(0, 0, 255), FIRST_POLAR_RING, LAST_POLAR_RING};
+PolarLedEffect::SingleColourPolarData redPolarData = {CRGB::Red, FIRST_POLAR_RING, LAST_POLAR_RING};
+PolarLedEffect::SingleColourPolarData greenPolarData = {CRGB::Lime, FIRST_POLAR_RING, LAST_POLAR_RING};
+PolarLedEffect::SingleColourPolarData bluePolarData = {CRGB::Blue, FIRST_POLAR_RING, LAST_POLAR_RING};
+PolarLedEffect::SingleColourPolarData blackPolarData = {CRGB::Black, FIRST_POLAR_RING, LAST_POLAR_RING};
+PolarLedEffect::SingleColourPolarData whitePolarData = {CRGB::White, FIRST_POLAR_RING, LAST_POLAR_RING};
 
-PolarLedEffect::MultiColourPolarData rgbPolarData = {3, new CHSV[3] {CHSV(HUE_RED, 255, 255), CHSV(HUE_GREEN, 255, 255), CHSV(HUE_BLUE, 255, 255)}, FIRST_POLAR_RING, LAST_POLAR_RING};
+PolarLedEffect::MultiColourPolarData rgbPolarData = {3, new CRGB[3] {CRGB::Red, CRGB::Lime, CRGB::Blue}, FIRST_POLAR_RING, LAST_POLAR_RING};
 
-PolarLedEffect::SingleColourPolarData red1stOutsideRingPolarData = {CHSV(HUE_RED, 255, 255), LAST_POLAR_RING, LAST_POLAR_RING};
-PolarLedEffect::SingleColourPolarData green2ndOutsideRingPolarData = {CHSV(HUE_GREEN, 255, 255), LAST_POLAR_RING-1, LAST_POLAR_RING-1};
-PolarLedEffect::SingleColourPolarData blue3rdOutsideRingPolarData = {CHSV(HUE_BLUE, 255, 255), LAST_POLAR_RING-2, LAST_POLAR_RING-2};
-PolarLedEffect::SingleColourPolarData white4thOutsideRingPolarData = {CHSV(0, 0, 255), LAST_POLAR_RING-3, LAST_POLAR_RING-3};
+PolarLedEffect::SingleColourPolarData red1stOutsideRingPolarData = {CRGB::Red, LAST_POLAR_RING, LAST_POLAR_RING};
+PolarLedEffect::SingleColourPolarData green2ndOutsideRingPolarData = {CRGB::Lime, LAST_POLAR_RING-1, LAST_POLAR_RING-1};
+PolarLedEffect::SingleColourPolarData blue3rdOutsideRingPolarData = {CRGB::Blue, LAST_POLAR_RING-2, LAST_POLAR_RING-2};
+PolarLedEffect::SingleColourPolarData white4thOutsideRingPolarData = {CRGB::White, LAST_POLAR_RING-3, LAST_POLAR_RING-3};
 
-PolarLedEffect::SingleColourPolarData black1stOutsideRingPolarData = {CHSV(0, 0, 0), LAST_POLAR_RING, LAST_POLAR_RING};
-PolarLedEffect::SingleColourPolarData black2ndOutsideRingPolarData = {CHSV(0, 0, 0), LAST_POLAR_RING-1, LAST_POLAR_RING-1};
-PolarLedEffect::SingleColourPolarData black3rdOutsideRingPolarData = {CHSV(0, 0, 0), LAST_POLAR_RING-2, LAST_POLAR_RING-2};
-PolarLedEffect::SingleColourPolarData black4thOutsideRingPolarData = {CHSV(0, 0, 0), LAST_POLAR_RING-3, LAST_POLAR_RING-3};
+PolarLedEffect::SingleColourPolarData black1stOutsideRingPolarData = {CRGB::Black, LAST_POLAR_RING, LAST_POLAR_RING};
+PolarLedEffect::SingleColourPolarData black2ndOutsideRingPolarData = {CRGB::Black, LAST_POLAR_RING-1, LAST_POLAR_RING-1};
+PolarLedEffect::SingleColourPolarData black3rdOutsideRingPolarData = {CRGB::Black, LAST_POLAR_RING-2, LAST_POLAR_RING-2};
+PolarLedEffect::SingleColourPolarData black4thOutsideRingPolarData = {CRGB::Black, LAST_POLAR_RING-3, LAST_POLAR_RING-3};
 
-Gradient::GradientPolarData rgbGradientPolarData = {2, 3, new CHSV[3] {CHSV(HUE_RED, 255, 255), CHSV(HUE_GREEN, 255, 255), CHSV(HUE_BLUE, 255, 255)}, FIRST_POLAR_RING, LAST_POLAR_RING};
-Gradient::GradientPolarData retroGradientPolarData = {2, 4, new CHSV[4] {CHSV(140, 255, 255), CHSV(200, 255, 255), CHSV(140, 20, 255), CHSV(200, 20, 255)}, FIRST_POLAR_RING, LAST_POLAR_RING};
-Gradient::GradientPolarData solarGradientPolarData = {2, 3, new CHSV[3] {CHSV(HUE_YELLOW, 255, 255), CHSV(HUE_YELLOW, 255, 255), CHSV(HUE_ORANGE, 255, 255)}, FIRST_POLAR_RING, LAST_POLAR_RING};
+Gradient::GradientPolarData<> rgbGradientPolarData = {2, Gradient::GradientColourModeRGB, 3, new CRGB[3] {CRGB::Red, CRGB::Lime, CRGB::Blue}, FIRST_POLAR_RING, LAST_POLAR_RING};
+Gradient::GradientPolarData<> retroGradientPolarData = {2, Gradient::GradientColourModeRGB, 4, new CRGB[4] {CRGB::DeepSkyBlue, CRGB::MediumOrchid, CRGB::LightCyan, CRGB::Lavender}, FIRST_POLAR_RING, LAST_POLAR_RING};
+Gradient::GradientPolarData<CHSV> retroGradientPolarDataHSV = {2, Gradient::GradientColourModeHSVSpectrum, 4, new CHSV[4] {CHSV(135, 170, 255), CHSV(210, 255, 255), CHSV(135, 20, 255), CHSV(210, 20, 255)}, FIRST_POLAR_RING, LAST_POLAR_RING};
+Gradient::GradientPolarData<> solarGradientPolarData = {2, Gradient::GradientColourModeRGB, 3, new CRGB[3] {CRGB::Yellow, CRGB::Yellow, CRGB::Orange}, FIRST_POLAR_RING, LAST_POLAR_RING};
 
 
 struct EffectListEntry {
@@ -76,6 +77,7 @@ EffectListEntry effList[] = {
   {&defaultCircleWipeReversed, &black4thOutsideRingPolarData},
   {&defaultGradient, &rgbGradientPolarData},
   {&defaultGradient, &retroGradientPolarData},
+  {&defaultGradient, &retroGradientPolarDataHSV},
   {&defaultGradient, &solarGradientPolarData},
 };
 int cur_effect = 0;

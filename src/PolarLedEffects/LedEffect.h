@@ -4,6 +4,16 @@
 #include <FastLED.h>
 
 class LedEffect {
+public:
+    struct SingleColourData {
+        CRGB colour;
+    };
+
+    struct MultiColourData {
+        unsigned int nColours;
+        CRGB *colours;
+    };
+
 private:
     int duration;
     unsigned int ease_factor; // 0 for linear, 1 for quad, 2 for cubic, etc
@@ -50,13 +60,4 @@ public:
     inline void MarkStartTime() {
         MarkStartTime(millis());
     }
-
-    struct SingleColourData {
-        CHSV colour;
-    };
-    
-    struct MultiColourData {
-        unsigned int nColours;
-        CHSV *colours;
-    };
 };

@@ -6,6 +6,20 @@
 #include "LedEffect.h"
 
 class PolarLedEffect : public LedEffect {
+public:
+    struct SingleColourPolarData {
+        CRGB colour;
+        unsigned int firstRing;
+        unsigned int lastRing;
+    };
+
+    struct MultiColourPolarData {
+        unsigned int nColours;
+        CRGB *colours;
+        unsigned int firstRing;
+        unsigned int lastRing;
+    };
+
 protected:
     unsigned int led_ring_lengths[9] = {1, 8, 12, 16, 24, 32, 40, 48, 60};
     
@@ -95,17 +109,4 @@ protected:
 
 public:
     using LedEffect::LedEffect;
-
-    struct SingleColourPolarData {
-        CHSV colour;
-        unsigned int firstRing;
-        unsigned int lastRing;
-    };
-    
-    struct MultiColourPolarData {
-        unsigned int nColours;
-        CHSV *colours;
-        unsigned int firstRing;
-        unsigned int lastRing;
-    };
 };
