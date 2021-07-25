@@ -31,46 +31,10 @@ protected:
         else
             return (ledDegrees >= degStart) || (ledDegrees <= degEnd);
     }
-    
-    // note: led_count should contain a complete ring
-    void fillAllInArcAndDistance(CRGB *leds, unsigned int led_count, CRGB colour, 
-            unsigned int degStart, unsigned int degEnd, unsigned int ringStart, unsigned int ringEnd) {
-        unsigned int led_n = 0;
-        for (unsigned int ring_n = FIRST_POLAR_RING; ring_n <= ringEnd; ring_n++) {
-            if (led_n >= led_count) break;
-            if (ring_n > LAST_POLAR_RING) break;
-            if (ring_n >= sizeof(led_ring_lengths) / sizeof(led_ring_lengths[0])) break;
-            
-            unsigned int ring_size = led_ring_lengths[ring_n];
-            
-            // skip over rings until the effect starts
-            if (ring_n < ringStart) {
-                led_n += ring_size;
-                continue;
-            }
-            
-            // we are in the distance to be filled
-            for (unsigned int i = 0; i < ring_size; i++) {
-                if (isLedInArc(i, ring_size, degStart, degEnd)) {
-                    leds[led_n] = colour;
-                }
-                led_n++;
-            }
-        }
-    }
-    
-    inline void fillAllInArc(CRGB *leds, unsigned int led_count, CRGB colour, 
-            unsigned int degStart, unsigned int degEnd) {
-        fillAllInArcAndDistance(leds, led_count, colour, degStart, degEnd, 0, 999);
-    }
-    
-    inline void fillAllInDistance(CRGB *leds, unsigned int led_count, CRGB colour, 
-            unsigned int ringStart, unsigned int ringEnd) {
-        fillAllInArcAndDistance(leds, led_count, colour, 0, 360, ringStart, ringEnd);
-    }
 
     typedef CRGB (*PolarSampler)(unsigned int deg, unsigned int ring, void *data);
 
+    // note: led_count should contain a complete ring
     inline void sampleInArcAndDistance(CRGB *leds, unsigned int led_count, PolarSampler sampler, void *userdata, 
             unsigned int degStart, unsigned int degEnd, unsigned int ringStart, unsigned int ringEnd) {
         unsigned int led_n = 0;
@@ -105,6 +69,27 @@ protected:
     inline void sampleInDistance(CRGB *leds, unsigned int led_count, PolarSampler sampler, void *userdata, 
             unsigned int ringStart, unsigned int ringEnd) {
         sampleInArcAndDistance(leds, led_count, sampler, userdata, 0, 360, ringStart, ringEnd);
+    }
+
+
+    static CRGB fillSampler(unsigned int deg, unsigned int ring, void *data) {
+        return *(CRGB*)data;
+    }
+
+    // note: led_count should contain a complete ring
+    void fillAllInArcAndDistance(CRGB *leds, unsigned int led_count, CRGB colour, 
+            unsigned int degStart, unsigned int degEnd, unsigned int ringStart, unsigned int ringEnd) {
+        sampleInArcAndDistance(leds, led_count, fillSampler, &colour, degStart, degEnd, ringStart, ringEnd);
+    }
+    
+    inline void fillAllInArc(CRGB *leds, unsigned int led_count, CRGB colour, 
+            unsigned int degStart, unsigned int degEnd) {
+        fillAllInArcAndDistance(leds, led_count, colour, degStart, degEnd, 0, 999);
+    }
+    
+    inline void fillAllInDistance(CRGB *leds, unsigned int led_count, CRGB colour, 
+            unsigned int ringStart, unsigned int ringEnd) {
+        fillAllInArcAndDistance(leds, led_count, colour, 0, 360, ringStart, ringEnd);
     }
 
 public:
