@@ -24,6 +24,9 @@ public:
     };
 
 private:
+    // sampler data is distinct from the effect data so that it can
+    // be guaranteed that there's always two colours per pole
+    // (input data only strictly requires one)
     struct SamplerData {
         unsigned int nPoles;
         GradientColourMode colourMode;
