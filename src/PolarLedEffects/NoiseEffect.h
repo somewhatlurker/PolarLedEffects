@@ -17,7 +17,7 @@ public:
     struct NoiseEffectPolarData {
         NoiseEffectColourMode colourMode;
         COLOUR_T colours[2];
-        byte lavaThreshold;
+        byte displayTheshold;
         unsigned int speedMultiplier;
         unsigned int firstRing;
         unsigned int lastRing;
@@ -43,7 +43,7 @@ private:
 
         if (sd->NoiseEffectData->colourMode == NoiseEffectColourModeRGB) {
             NoiseEffectPolarData<CRGB> *nd = (NoiseEffectPolarData<CRGB>*)sd->NoiseEffectData;
-            if (noiseSample < nd->lavaThreshold) {
+            if (noiseSample < nd->displayTheshold) {
                 out = nd->colours[1];
             }
             else {
@@ -54,7 +54,7 @@ private:
         }
         else {
             NoiseEffectPolarData<CHSV> *nd = (NoiseEffectPolarData<CHSV>*)sd->NoiseEffectData;
-            if (noiseSample < nd->lavaThreshold) {
+            if (noiseSample < nd->displayTheshold) {
                 out = nd->colours[1];
             }
             else {
