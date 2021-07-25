@@ -25,6 +25,8 @@ CircleZoomReversed defaultCircleZoomReversed = CircleZoomReversed();
 CircleWipeReversed defaultCircleWipeReversed = CircleWipeReversed();
 #include "Gradient.h"
 Gradient defaultGradient = Gradient(5000, 1);
+#include "LavaLamp.h"
+LavaLamp defaultLavaLamp = LavaLamp(5000, 1);
 
 PolarLedEffect::SingleColourPolarData redPolarData = {CRGB::Red, FIRST_POLAR_RING, LAST_POLAR_RING};
 PolarLedEffect::SingleColourPolarData greenPolarData = {CRGB::Lime, FIRST_POLAR_RING, LAST_POLAR_RING};
@@ -48,6 +50,8 @@ Gradient::GradientPolarData<> rgbGradientPolarData = {2, Gradient::GradientColou
 Gradient::GradientPolarData<> retroGradientPolarData = {2, Gradient::GradientColourModeRGB, 4, new CRGB[4] {CRGB::DeepSkyBlue, CRGB::MediumOrchid, CRGB::LightCyan, CRGB::Lavender}, FIRST_POLAR_RING, LAST_POLAR_RING};
 Gradient::GradientPolarData<CHSV> retroGradientPolarDataHSV = {2, Gradient::GradientColourModeHSVSpectrum, 4, new CHSV[4] {CHSV(135, 170, 255), CHSV(210, 255, 255), CHSV(135, 20, 255), CHSV(210, 20, 255)}, FIRST_POLAR_RING, LAST_POLAR_RING};
 Gradient::GradientPolarData<> solarGradientPolarData = {2, Gradient::GradientColourModeRGB, 3, new CRGB[3] {CRGB::Yellow, CRGB::Yellow, CRGB::Orange}, FIRST_POLAR_RING, LAST_POLAR_RING};
+
+LavaLamp::LavaLampPolarData<> retroLavaLampPolarData = {LavaLamp::LavaLampColourModeRGB, {CRGB::DeepSkyBlue, CRGB::MediumOrchid}, 150, FIRST_POLAR_RING, LAST_POLAR_RING};
 
 
 struct EffectListEntry {
@@ -79,6 +83,7 @@ EffectListEntry effList[] = {
   {&defaultGradient, &retroGradientPolarData},
   {&defaultGradient, &retroGradientPolarDataHSV},
   {&defaultGradient, &solarGradientPolarData},
+  {&defaultLavaLamp, &retroLavaLampPolarData},
 };
 int cur_effect = 0;
 

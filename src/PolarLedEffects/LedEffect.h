@@ -44,6 +44,27 @@ protected:
         return easedTime(time());
     }
 
+
+    static inline byte Mix(byte one, byte two, unsigned int factor, unsigned int scale) {
+        return ((uint32_t)one * (scale - factor) + (uint32_t)two * factor) / scale;
+    }
+
+    static inline byte MixCirc(byte one, byte two, unsigned int factor, unsigned int scale) {
+        bool twoLarger = two > one;
+        bool swap = twoLarger ? two - one > 128 : one - two > 128;
+        if (swap) {
+            if (twoLarger) {
+                return (((uint32_t)one + 256) * (scale - factor) + (uint32_t)two * factor) / scale;
+            }
+            else {
+                return ((uint32_t)one * (scale - factor) + ((uint32_t)two + 256) * factor) / scale;
+            }
+        }
+        else {
+            return ((uint32_t)one * (scale - factor) + (uint32_t)two * factor) / scale;
+        }
+    }
+
 public:
     LedEffect(int duration_ms = 1000, unsigned int easing = 1)
         : duration{duration_ms}, ease_factor{easing} {}

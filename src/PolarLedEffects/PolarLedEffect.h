@@ -22,6 +22,13 @@ public:
 
 protected:
     unsigned int led_ring_lengths[9] = {1, 8, 12, 16, 24, 32, 40, 48, 60};
+
+    static inline unsigned int* polar_to_xy(unsigned int deg, int r) {
+        static unsigned int out[2];
+        out[0] = (unsigned int)(cos16((uint32_t)deg * 65535 / 360) * r + 32768);
+        out[1] = (unsigned int)(sin16((uint32_t)deg * 65535 / 360) * r + 32768);
+        return out;
+    }
     
     inline bool isLedInArc(unsigned int ledPos, unsigned int ledSegments, unsigned int degStart, unsigned int degEnd) {
         unsigned int ledDegrees = 360 * ledPos / ledSegments;

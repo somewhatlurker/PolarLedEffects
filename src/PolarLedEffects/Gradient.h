@@ -41,26 +41,6 @@ private:
         unsigned int startDegrees;
     };
 
-    static inline byte Mix(byte one, byte two, unsigned int factor, unsigned int scale) {
-        return ((uint32_t)one * (scale - factor) + (uint32_t)two * factor) / scale;
-    }
-
-    static inline byte MixCirc(byte one, byte two, unsigned int factor, unsigned int scale) {
-        bool twoLarger = two > one;
-        bool swap = twoLarger ? two - one > 128 : one - two > 128;
-        if (swap) {
-            if (twoLarger) {
-                return (((uint32_t)one + 256) * (scale - factor) + (uint32_t)two * factor) / scale;
-            }
-            else {
-                return ((uint32_t)one * (scale - factor) + ((uint32_t)two + 256) * factor) / scale;
-            }
-        }
-        else {
-            return ((uint32_t)one * (scale - factor) + (uint32_t)two * factor) / scale;
-        }
-    }
-
     static CRGB GradientSampler(unsigned int deg, unsigned int ring, void *data) {
         SamplerData *d = (SamplerData*)data;
 
@@ -74,7 +54,7 @@ private:
 
         CRGB out;
 
-        if (d->colourMode == Gradient::GradientColourModeRGB) {
+        if (d->colourMode == GradientColourModeRGB) {
             byte r_outer = Mix(d->cols.rgb[0].r, d->cols.rgb[1].r, poleDeg, poleSize);
             byte g_outer = Mix(d->cols.rgb[0].g, d->cols.rgb[1].g, poleDeg, poleSize);
             byte b_outer = Mix(d->cols.rgb[0].b, d->cols.rgb[1].b, poleDeg, poleSize);
