@@ -52,7 +52,7 @@ Gradient::GradientPolarData<CHSV> retroGradientPolarDataHSV = {2, Gradient::Grad
 Gradient::GradientPolarData<> solarGradientPolarData = {2, Gradient::GradientColourModeRGB, 3, new CRGB[3] {CRGB::Yellow, CRGB::Yellow, CRGB::Orange}, FIRST_POLAR_RING, LAST_POLAR_RING};
 
 NoiseEffect::NoiseEffectPolarData<> retroLavaLampNoisePolarData = {NoiseEffect::NoiseEffectColourModeRGB, {CRGB::DeepSkyBlue, CRGB::MediumOrchid}, 150, 150, FIRST_POLAR_RING, LAST_POLAR_RING};
-NoiseEffect::NoiseEffectPolarData<> sparkleNoisePolarData = {NoiseEffect::NoiseEffectColourModeRGB, {CRGB::White, CRGB::Black}, 180, 4000, FIRST_POLAR_RING, LAST_POLAR_RING};
+NoiseEffect::NoiseEffectPolarData<> sparkleNoisePolarData = {NoiseEffect::NoiseEffectColourModeRGB, {CRGB::White, CRGB::Black}, 180, 3000, FIRST_POLAR_RING, LAST_POLAR_RING};
 
 
 struct EffectListEntry {
