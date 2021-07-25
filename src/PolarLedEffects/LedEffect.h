@@ -17,9 +17,10 @@ public:
 private:
     int duration;
     unsigned int ease_factor; // 0 for linear, 1 for quad, 2 for cubic, etc
-    int start_time;
     
 protected:
+    int start_time;
+
     float time(int millis) {
         return (float)(millis - start_time) / (float)duration;
     }

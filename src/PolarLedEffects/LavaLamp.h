@@ -75,10 +75,10 @@ public:
         LavaLampPolarData<> *d = (LavaLampPolarData<>*)data;
         
         float t = easedTime();
-        unsigned int startTime = (unsigned int)(t * 200.0f);
+        unsigned int startTime = (unsigned int)(t * 150.0f);
 
         SamplerData<> s;
-        s.startTime = startTime;
+        s.startTime = LedEffect::start_time + startTime;
         s.lavaLampData = d;
 
         sampleInDistance(leds, led_count, LavaLampSampler, &s, d->firstRing, d->lastRing);
