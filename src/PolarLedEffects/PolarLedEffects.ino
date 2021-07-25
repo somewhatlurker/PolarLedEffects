@@ -25,8 +25,8 @@ CircleZoomReversed defaultCircleZoomReversed = CircleZoomReversed();
 CircleWipeReversed defaultCircleWipeReversed = CircleWipeReversed();
 #include "Gradient.h"
 Gradient defaultGradient = Gradient(5000, 1);
-#include "LavaLamp.h"
-LavaLamp defaultLavaLamp = LavaLamp(5000, 1);
+#include "NoiseEffect.h"
+NoiseEffect defaultNoiseEffect = NoiseEffect(5000, 1);
 
 PolarLedEffect::SingleColourPolarData redPolarData = {CRGB::Red, FIRST_POLAR_RING, LAST_POLAR_RING};
 PolarLedEffect::SingleColourPolarData greenPolarData = {CRGB::Lime, FIRST_POLAR_RING, LAST_POLAR_RING};
@@ -51,7 +51,8 @@ Gradient::GradientPolarData<> retroGradientPolarData = {2, Gradient::GradientCol
 Gradient::GradientPolarData<CHSV> retroGradientPolarDataHSV = {2, Gradient::GradientColourModeHSVSpectrum, 4, new CHSV[4] {CHSV(135, 170, 255), CHSV(210, 255, 255), CHSV(135, 20, 255), CHSV(210, 20, 255)}, FIRST_POLAR_RING, LAST_POLAR_RING};
 Gradient::GradientPolarData<> solarGradientPolarData = {2, Gradient::GradientColourModeRGB, 3, new CRGB[3] {CRGB::Yellow, CRGB::Yellow, CRGB::Orange}, FIRST_POLAR_RING, LAST_POLAR_RING};
 
-LavaLamp::LavaLampPolarData<> retroLavaLampPolarData = {LavaLamp::LavaLampColourModeRGB, {CRGB::DeepSkyBlue, CRGB::MediumOrchid}, 150, FIRST_POLAR_RING, LAST_POLAR_RING};
+NoiseEffect::NoiseEffectPolarData<> retroLavaLampNoisePolarData = {NoiseEffect::NoiseEffectColourModeRGB, {CRGB::DeepSkyBlue, CRGB::MediumOrchid}, 150, 150, FIRST_POLAR_RING, LAST_POLAR_RING};
+NoiseEffect::NoiseEffectPolarData<> sparkleNoisePolarData = {NoiseEffect::NoiseEffectColourModeRGB, {CRGB::White, CRGB::Black}, 180, 4000, FIRST_POLAR_RING, LAST_POLAR_RING};
 
 
 struct EffectListEntry {
@@ -83,7 +84,8 @@ EffectListEntry effList[] = {
   {&defaultGradient, &retroGradientPolarData},
   {&defaultGradient, &retroGradientPolarDataHSV},
   {&defaultGradient, &solarGradientPolarData},
-  {&defaultLavaLamp, &retroLavaLampPolarData},
+  {&defaultNoiseEffect, &retroLavaLampNoisePolarData},
+  {&defaultNoiseEffect, &sparkleNoisePolarData},
 };
 int cur_effect = 0;
 
