@@ -3,6 +3,8 @@
 
 #define LED_PIN 3
 #define NUM_LEDS 37
+#define LED_BRIGHTNESS 8
+#define LED_CURRENT_LIMIT 300
 
 #define ANIM_FPS 120
 #define ANIM_FRAME_MICROS (1000000 / ANIM_FPS)
@@ -94,6 +96,8 @@ unsigned long last_frame_micros;
 CRGB leds[NUM_LEDS];
 
 void setup() {
+  FastLED.setBrightness(LED_BRIGHTNESS);
+  FastLED.setMaxPowerInVoltsAndMilliamps(5, LED_CURRENT_LIMIT);
   FastLED.addLeds<WS2812B, LED_PIN, GRB>(leds, NUM_LEDS);
   effList[cur_effect].effect->MarkStartTime();
   last_frame_micros = micros();
