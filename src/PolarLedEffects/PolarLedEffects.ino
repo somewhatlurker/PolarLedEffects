@@ -49,11 +49,11 @@ PolarLedEffect::SingleColourPolarData black3rdOutsideRingPolarData = {CRGB::Blac
 PolarLedEffect::SingleColourPolarData black4thOutsideRingPolarData = {CRGB::Black, LAST_POLAR_RING-3, LAST_POLAR_RING-3};
 
 Gradient::GradientPolarData<> rgbGradientPolarData = {2, Gradient::GradientColourModeRGB, 3, new CRGB[3] {CRGB::Red, CRGB::Lime, CRGB::Blue}, FIRST_POLAR_RING, LAST_POLAR_RING};
-Gradient::GradientPolarData<> retroGradientPolarData = {2, Gradient::GradientColourModeRGB, 4, new CRGB[4] {CRGB::DeepSkyBlue, CRGB::MediumOrchid, CRGB::LightCyan, CRGB::Lavender}, FIRST_POLAR_RING, LAST_POLAR_RING};
-Gradient::GradientPolarData<CHSV> retroGradientPolarDataHSV = {2, Gradient::GradientColourModeHSVSpectrum, 4, new CHSV[4] {CHSV(135, 170, 255), CHSV(210, 255, 255), CHSV(135, 20, 255), CHSV(210, 20, 255)}, FIRST_POLAR_RING, LAST_POLAR_RING};
-Gradient::GradientPolarData<> solarGradientPolarData = {2, Gradient::GradientColourModeRGB, 3, new CRGB[3] {CRGB::Yellow, CRGB::Yellow, CRGB::Orange}, FIRST_POLAR_RING, LAST_POLAR_RING};
+Gradient::GradientPolarData<> retroGradientPolarData = {2, Gradient::GradientColourModeRGB, 4, new CRGB[4] {CRGB::DeepSkyBlue, CRGB::DarkViolet, CRGB::LightCyan, CRGB::Lavender}, FIRST_POLAR_RING, LAST_POLAR_RING};
+Gradient::GradientPolarData<CHSV> retroGradientPolarDataHSV = {2, Gradient::GradientColourModeHSVSpectrum, 4, new CHSV[4] {CHSV(135, 200, 255), CHSV(210, 255, 255), CHSV(135, 20, 255), CHSV(210, 20, 255)}, FIRST_POLAR_RING, LAST_POLAR_RING};
+Gradient::GradientPolarData<> solarGradientPolarData = {2, Gradient::GradientColourModeRGB, 3, new CRGB[3] {CRGB::Yellow, CRGB::Yellow, CRGB::DarkOrange}, FIRST_POLAR_RING, LAST_POLAR_RING};
 
-NoiseEffect::NoiseEffectPolarData<> retroLavaLampNoisePolarData = {NoiseEffect::NoiseEffectColourModeRGB, {CRGB::DeepSkyBlue, CRGB::MediumOrchid}, 150, 150, FIRST_POLAR_RING, LAST_POLAR_RING};
+NoiseEffect::NoiseEffectPolarData<> retroLavaLampNoisePolarData = {NoiseEffect::NoiseEffectColourModeRGB, {CRGB::DeepSkyBlue, CRGB::DarkViolet}, 150, 150, FIRST_POLAR_RING, LAST_POLAR_RING};
 NoiseEffect::NoiseEffectPolarData<> sparkleNoisePolarData = {NoiseEffect::NoiseEffectColourModeRGB, {CRGB::White, CRGB::Black}, 180, 3000, FIRST_POLAR_RING, LAST_POLAR_RING};
 
 
