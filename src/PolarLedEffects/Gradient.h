@@ -44,8 +44,8 @@ private:
     static CRGB GradientSampler(unsigned int deg, unsigned int ring, void *data) {
         SamplerData *d = (SamplerData*)data;
 
-        deg = (deg - d->startDegrees) % 360;
-        //while ((int)deg < 0) deg += 360;
+        deg = deg - d->startDegrees;
+        while ((int)deg < 0) deg += 360;
 
         unsigned int poleSize = 360 / (d->nPoles - 1);
         unsigned int pole = deg / poleSize;
