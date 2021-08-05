@@ -29,6 +29,8 @@ CircleWipeReversed defaultCircleWipeReversed = CircleWipeReversed();
 Gradient defaultGradient = Gradient(5000, 1);
 #include "NoiseEffect.h"
 NoiseEffect defaultNoiseEffect = NoiseEffect(5000, 1);
+#include "TextEffect.h"
+TextEffect defaultTextEffect = TextEffect(10000, 0);
 
 PolarLedEffect::SingleColourPolarData redPolarData = {CRGB::Red, FIRST_POLAR_RING, LAST_POLAR_RING};
 PolarLedEffect::SingleColourPolarData greenPolarData = {CRGB::Lime, FIRST_POLAR_RING, LAST_POLAR_RING};
@@ -55,6 +57,8 @@ Gradient::GradientPolarData<> solarGradientPolarData = {2, Gradient::GradientCol
 
 NoiseEffect::NoiseEffectPolarData<> retroLavaLampNoisePolarData = {NoiseEffect::NoiseEffectColourModeRGB, {CRGB::DeepSkyBlue, CRGB::DarkViolet}, 150, 150, FIRST_POLAR_RING, LAST_POLAR_RING};
 NoiseEffect::NoiseEffectPolarData<> sparkleNoisePolarData = {NoiseEffect::NoiseEffectColourModeRGB, {CRGB::White, CRGB::Black}, 180, 3000, FIRST_POLAR_RING, LAST_POLAR_RING};
+
+TextEffect::TextEffectPolarData helloWorldTextPolarData = {13, "Hello, World!", {CRGB::White, CRGB::Black}, FIRST_POLAR_RING, LAST_POLAR_RING};
 
 
 struct EffectListEntry {
@@ -88,6 +92,7 @@ EffectListEntry effList[] = {
   {&defaultGradient, &solarGradientPolarData},
   {&defaultNoiseEffect, &retroLavaLampNoisePolarData},
   {&defaultNoiseEffect, &sparkleNoisePolarData},
+  {&defaultTextEffect, &helloWorldTextPolarData},
 };
 int cur_effect = 0;
 
@@ -96,6 +101,7 @@ unsigned long last_frame_micros;
 CRGB leds[NUM_LEDS];
 
 void setup() {
+  Serial.begin(115200);
   FastLED.setBrightness(LED_BRIGHTNESS);
   FastLED.setMaxPowerInVoltsAndMilliamps(5, LED_CURRENT_LIMIT);
   FastLED.addLeds<WS2812B, LED_PIN, GRB>(leds, NUM_LEDS);

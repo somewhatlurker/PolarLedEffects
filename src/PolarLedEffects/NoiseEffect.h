@@ -31,13 +31,13 @@ private:
         unsigned int startTime;
     };
 
-    static CRGB NoiseEffectSampler(unsigned int deg, unsigned int ring, void *data) {
+    static CRGB NoiseEffectSampler(unsigned int deg, unsigned int ring, CRGB old_colour, void *data) {
         SamplerData<> *sd = (SamplerData<>*)data;
 
-        unsigned int scale = 16000 / sd->NoiseEffectData->lastRing;
-        unsigned int *xy = polar_to_xy(deg, (int)(ring*scale));
+        int scale = 32767 / sd->NoiseEffectData->lastRing;
+        int *xy = polar_to_xy(deg, (int)(ring*scale));
 
-        byte noiseSample = inoise8(xy[0], xy[1], sd->startTime);
+        byte noiseSample = inoise8(xy[0]+32768, xy[1]+32768, sd->startTime);
 
         CRGB out;
 

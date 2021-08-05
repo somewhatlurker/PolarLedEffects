@@ -41,7 +41,7 @@ private:
         unsigned int startDegrees;
     };
 
-    static CRGB GradientSampler(unsigned int deg, unsigned int ring, void *data) {
+    static CRGB GradientSampler(unsigned int deg, unsigned int ring, CRGB old_colour, void *data) {
         SamplerData *d = (SamplerData*)data;
 
         deg = deg - d->startDegrees;

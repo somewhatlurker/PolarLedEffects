@@ -23,10 +23,10 @@ public:
 protected:
     unsigned int led_ring_lengths[9] = {1, 8, 12, 16, 24, 32, 40, 48, 60};
 
-    static inline unsigned int* polar_to_xy(unsigned int deg, int r) {
-        static unsigned int out[2];
-        out[0] = (unsigned int)(cos16((uint32_t)deg * 65535 / 360) * r + 32768);
-        out[1] = (unsigned int)(sin16((uint32_t)deg * 65535 / 360) * r + 32768);
+    static inline int* polar_to_xy(unsigned int deg, int r) {
+        static int out[2];
+        out[0] = (int)round(sin16((uint32_t)deg * 65535 / 360) / 32767.f * r);
+        out[1] = (int)round(0 - cos16((uint32_t)deg * 65535 / 360) / 32767.f * r);
         return out;
     }
     
@@ -39,7 +39,7 @@ protected:
             return (ledDegrees >= degStart) || (ledDegrees <= degEnd);
     }
 
-    typedef CRGB (*PolarSampler)(unsigned int deg, unsigned int ring, void *data);
+    typedef CRGB (*PolarSampler)(unsigned int deg, unsigned int ring, CRGB old_colour, void *data);
 
     // note: led_count should contain a complete ring
     inline void sampleInArcAndDistance(CRGB *leds, unsigned int led_count, PolarSampler sampler, void *userdata, 
@@ -61,7 +61,7 @@ protected:
             // we are in the distance to be filled
             for (unsigned int i = 0; i < ring_size; i++) {
                 if (isLedInArc(i, ring_size, degStart, degEnd)) {
-                    leds[led_n] = sampler(360 * i / ring_size, ring_n, userdata);
+                    leds[led_n] = sampler(360 * i / ring_size, ring_n, leds[led_n], userdata);
                 }
                 led_n++;
             }
@@ -79,7 +79,7 @@ protected:
     }
 
 
-    static CRGB fillSampler(unsigned int deg, unsigned int ring, void *data) {
+    static CRGB fillSampler(unsigned int deg, unsigned int ring, CRGB old_colour, void *data) {
         return *(CRGB*)data;
     }
 
