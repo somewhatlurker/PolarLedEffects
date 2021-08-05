@@ -74,8 +74,9 @@ public:
         float t = easedTime();
 
         int text_len_pixels = 5 * d->nChars;
+        int fix_end_scroll_pos = d->nChars > 1 ? 1 : 0;
         //int leftOffset = d->lastRing - t * (text_len_pixels + 2*d->lastRing);
-        int leftOffset = -2 - t * (text_len_pixels - 5);
+        int leftOffset = -2 - t * (text_len_pixels - 5 + fix_end_scroll_pos);
 
         SamplerData s;
         s.leftOffset = leftOffset;
