@@ -72,7 +72,12 @@ public:
     
     // returns true when effect is complete (false while still running)
     virtual bool UpdateLeds(CRGB *leds, unsigned int led_count, void *data) {
-        return true;
+        float t = time();
+        
+        if (t < 1.0f)
+            return false;
+        else
+            return true;
     }
     
     inline void MarkStartTime(int t) {

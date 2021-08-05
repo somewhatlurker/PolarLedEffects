@@ -17,6 +17,7 @@ public:
     struct NoiseEffectPolarData {
         NoiseEffectColourMode colourMode;
         COLOUR_T colours[2];
+        bool transparentBg;
         byte displayTheshold;
         unsigned int speedMultiplier;
         unsigned int firstRing;
@@ -43,25 +44,42 @@ private:
 
         if (sd->NoiseEffectData->colourMode == NoiseEffectColourModeRGB) {
             NoiseEffectPolarData<CRGB> *nd = (NoiseEffectPolarData<CRGB>*)sd->NoiseEffectData;
+
+            CRGB fg_col = nd->colours[0];
+    
+            CRGB bg_col = old_colour;
+            if (!nd->transparentBg)
+                bg_col = nd->colours[1];
+            
             if (noiseSample < nd->displayTheshold) {
-                out = nd->colours[1];
+                out = bg_col;
             }
             else {
-                out.r = Mix(nd->colours[1].r, nd->colours[0].r, noiseSample, 255);
-                out.g = Mix(nd->colours[1].g, nd->colours[0].g, noiseSample, 255);
-                out.b = Mix(nd->colours[1].b, nd->colours[0].b, noiseSample, 255);
+                out.r = Mix(bg_col.r, fg_col.r, noiseSample, 255);
+                out.g = Mix(bg_col.g, fg_col.g, noiseSample, 255);
+                out.b = Mix(bg_col.b, fg_col.b, noiseSample, 255);
             }
         }
         else {
             NoiseEffectPolarData<CHSV> *nd = (NoiseEffectPolarData<CHSV>*)sd->NoiseEffectData;
+
+            CHSV fg_col = nd->colours[0];
+    
+            CHSV bg_col = rgb2hsv_approximate(old_colour);
+            CRGB bg_col_nomix = old_colour; // avoid round tripping BG through HSV when not blended
+            if (!nd->transparentBg) {
+                bg_col = nd->colours[1];
+                bg_col_nomix = nd->colours[1];
+            }
+            
             if (noiseSample < nd->displayTheshold) {
-                out = nd->colours[1];
+                out = bg_col_nomix;
             }
             else {
                 CHSV out_hsv;
-                out_hsv.hue = MixCirc(nd->colours[1].hue, nd->colours[0].hue, noiseSample, 255);
-                out_hsv.sat = Mix(nd->colours[1].sat, nd->colours[0].sat, noiseSample, 255);
-                out_hsv.val = Mix(nd->colours[1].val, nd->colours[0].val, noiseSample, 255);
+                out_hsv.hue = MixCirc(bg_col.hue, fg_col.hue, noiseSample, 255);
+                out_hsv.sat = Mix(bg_col.sat, fg_col.sat, noiseSample, 255);
+                out_hsv.val = Mix(bg_col.val, fg_col.val, noiseSample, 255);
             }
         }
 

@@ -12,6 +12,7 @@ public:
         unsigned int nChars;
         const char *chars;
         CRGB colours[2];
+        bool transparentBg;
         unsigned int firstRing;
         unsigned int lastRing;
     };
@@ -27,7 +28,10 @@ private:
         SamplerData *sd = (SamplerData*)data;
 
         CRGB fg_col = sd->TextEffectData->colours[0];
-        CRGB bg_col = sd->TextEffectData->colours[1];
+
+        CRGB bg_col = old_colour;
+        if (!sd->TextEffectData->transparentBg)
+            bg_col = sd->TextEffectData->colours[1];
 
         int *xy = polar_to_xy(deg, (int)ring);
 
@@ -35,8 +39,7 @@ private:
         xy[0] = xy[0] * scale;
         xy[1] = xy[1] * scale;
 
-        // make 0,0 top-left pixel of centre char
-        xy[0] += 3;
+        // make y=0 top pixel of chars
         xy[1] += 2;
 
         int c_row = xy[1];
@@ -71,7 +74,8 @@ public:
         float t = easedTime();
 
         int text_len_pixels = 5 * d->nChars;
-        int leftOffset = 0 - t * (text_len_pixels - 5);
+        //int leftOffset = d->lastRing - t * (text_len_pixels + 2*d->lastRing);
+        int leftOffset = -2 - t * (text_len_pixels - 5);
 
         SamplerData s;
         s.leftOffset = leftOffset;
