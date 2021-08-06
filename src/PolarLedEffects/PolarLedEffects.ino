@@ -37,6 +37,7 @@ NoiseEffect defaultNoiseEffect = NoiseEffect(5000, 1);
 #include "TextEffect.h"
 TextEffect defaultTextEffect = TextEffect();
 TextEffect longTextEffect = TextEffect(5000, 0);
+TextEffect superLongTextEffect = TextEffect(30000, 0);
 
 PolarLedEffect::SingleColourPolarData redPolarData = {CRGB::Red, CRGB::Black, true, FIRST_POLAR_RING, LAST_POLAR_RING};
 PolarLedEffect::SingleColourPolarData greenPolarData = {CRGB::Lime, CRGB::Black, true, FIRST_POLAR_RING, LAST_POLAR_RING};
@@ -176,6 +177,22 @@ EffectListEntry effList[] = {
       &defaultNoiseEffect, new NoiseEffect::NoiseEffectPolarData<> {NoiseEffect::NoiseEffectColourModeRGB, CRGB::White, CRGB::Black, false, 180, 3000, FIRST_POLAR_RING, LAST_POLAR_RING},
       &nullEffect, NULL,
   },
+
+  /*
+  // ASCII charset tests
+  {
+      &superLongTextEffect, new TextEffect::TextEffectPolarData {28, " ABCDEFGHIJKLMNOPQRSTUVWXYZ ", CRGB::White, CRGB::Black, false, FIRST_POLAR_RING, LAST_POLAR_RING},
+      &nullEffect, NULL,
+  },
+  {
+      &superLongTextEffect, new TextEffect::TextEffectPolarData {28, " !\"#$%&'()*+,-./0123456789 ", CRGB::White, CRGB::Black, false, FIRST_POLAR_RING, LAST_POLAR_RING},
+      &nullEffect, NULL,
+  },
+  {
+      &superLongTextEffect, new TextEffect::TextEffectPolarData {20, " :;<=>?@[\\]^_`{|}~ ", CRGB::White, CRGB::Black, false, FIRST_POLAR_RING, LAST_POLAR_RING},
+      &nullEffect, NULL,
+  },
+  */
 };
 unsigned int curEffect = 0;
 
