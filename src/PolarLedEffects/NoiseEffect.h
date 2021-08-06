@@ -16,7 +16,8 @@ public:
     template<typename COLOUR_T = CRGB>
     struct NoiseEffectPolarData {
         NoiseEffectColourMode colourMode;
-        COLOUR_T colours[2];
+        COLOUR_T colour;
+        COLOUR_T bgColour;
         bool transparentBg;
         byte displayTheshold;
         unsigned int speedMultiplier;
@@ -45,11 +46,11 @@ private:
         if (sd->NoiseEffectData->colourMode == NoiseEffectColourModeRGB) {
             NoiseEffectPolarData<CRGB> *nd = (NoiseEffectPolarData<CRGB>*)sd->NoiseEffectData;
 
-            CRGB fg_col = nd->colours[0];
+            CRGB fg_col = nd->colour;
     
             CRGB bg_col = old_colour;
             if (!nd->transparentBg)
-                bg_col = nd->colours[1];
+                bg_col = nd->bgColour;
             
             if (noiseSample < nd->displayTheshold) {
                 out = bg_col;
@@ -63,13 +64,13 @@ private:
         else {
             NoiseEffectPolarData<CHSV> *nd = (NoiseEffectPolarData<CHSV>*)sd->NoiseEffectData;
 
-            CHSV fg_col = nd->colours[0];
+            CHSV fg_col = nd->colour;
     
             CHSV bg_col = rgb2hsv_approximate(old_colour);
             CRGB bg_col_nomix = old_colour; // avoid round tripping BG through HSV when not blended
             if (!nd->transparentBg) {
-                bg_col = nd->colours[1];
-                bg_col_nomix = nd->colours[1];
+                bg_col = nd->bgColour;
+                bg_col_nomix = nd->bgColour;
             }
             
             if (noiseSample < nd->displayTheshold) {

@@ -11,7 +11,8 @@ public:
     struct TextEffectPolarData {
         unsigned int nChars;
         const char *chars;
-        CRGB colours[2];
+        CRGB colour;
+        CRGB bgColour;
         bool transparentBg;
         unsigned int firstRing;
         unsigned int lastRing;
@@ -27,11 +28,11 @@ private:
     static CRGB TextEffectSampler(unsigned int deg, unsigned int ring, CRGB old_colour, void *data) {
         SamplerData *sd = (SamplerData*)data;
 
-        CRGB fg_col = sd->TextEffectData->colours[0];
+        CRGB fg_col = sd->TextEffectData->colour;
 
         CRGB bg_col = old_colour;
         if (!sd->TextEffectData->transparentBg)
-            bg_col = sd->TextEffectData->colours[1];
+            bg_col = sd->TextEffectData->bgColour;
 
         int *xy = polar_to_xy(deg, (int)ring);
 

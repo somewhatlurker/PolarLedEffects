@@ -17,6 +17,9 @@ public:
         
         float t = easedTime();
         unsigned int endRing = d->lastRing - (unsigned int)(t * (d->lastRing - d->firstRing));
+
+        if (!d->transparentBg)
+            fillAllInDistance(leds, led_count, d->bgColour, 0, endRing-1);
         fillAllInDistance(leds, led_count, d->colour, endRing, d->lastRing);
         
         if (t < 1.0f)

@@ -39,44 +39,13 @@ NoiseEffect defaultNoiseEffect = NoiseEffect(5000, 1);
 TextEffect defaultTextEffect = TextEffect();
 TextEffect longTextEffect = TextEffect(5000, 0);
 
-LedEffect::SingleColourData redColourData = {CRGB::Red};
-LedEffect::SingleColourData greenColourData = {CRGB::Lime};
-LedEffect::SingleColourData blueColourData = {CRGB::Blue};
-LedEffect::SingleColourData whiteColourData = {CRGB::White};
-LedEffect::SingleColourData blackColourData = {CRGB::Black};
+PolarLedEffect::SingleColourPolarData redPolarData = {CRGB::Red, CRGB::Black, true, FIRST_POLAR_RING, LAST_POLAR_RING};
+PolarLedEffect::SingleColourPolarData greenPolarData = {CRGB::Lime, CRGB::Black, true, FIRST_POLAR_RING, LAST_POLAR_RING};
+PolarLedEffect::SingleColourPolarData bluePolarData = {CRGB::Blue, CRGB::Black, true, FIRST_POLAR_RING, LAST_POLAR_RING};
+PolarLedEffect::SingleColourPolarData blackPolarData = {CRGB::Black, CRGB::Black, true, FIRST_POLAR_RING, LAST_POLAR_RING};
+PolarLedEffect::SingleColourPolarData whitePolarData = {CRGB::White, CRGB::Black, true, FIRST_POLAR_RING, LAST_POLAR_RING};
 
-PolarLedEffect::SingleColourPolarData redPolarData = {CRGB::Red, FIRST_POLAR_RING, LAST_POLAR_RING};
-PolarLedEffect::SingleColourPolarData greenPolarData = {CRGB::Lime, FIRST_POLAR_RING, LAST_POLAR_RING};
-PolarLedEffect::SingleColourPolarData bluePolarData = {CRGB::Blue, FIRST_POLAR_RING, LAST_POLAR_RING};
-PolarLedEffect::SingleColourPolarData blackPolarData = {CRGB::Black, FIRST_POLAR_RING, LAST_POLAR_RING};
-PolarLedEffect::SingleColourPolarData whitePolarData = {CRGB::White, FIRST_POLAR_RING, LAST_POLAR_RING};
-
-PolarLedEffect::MultiColourPolarData rgbPolarData = {3, new CRGB[3] {CRGB::Red, CRGB::Lime, CRGB::Blue}, FIRST_POLAR_RING, LAST_POLAR_RING};
-
-PolarLedEffect::SingleColourPolarData red1stOutsideRingPolarData = {CRGB::Red, LAST_POLAR_RING, LAST_POLAR_RING};
-PolarLedEffect::SingleColourPolarData green2ndOutsideRingPolarData = {CRGB::Lime, LAST_POLAR_RING-1, LAST_POLAR_RING-1};
-PolarLedEffect::SingleColourPolarData blue3rdOutsideRingPolarData = {CRGB::Blue, LAST_POLAR_RING-2, LAST_POLAR_RING-2};
-PolarLedEffect::SingleColourPolarData white4thOutsideRingPolarData = {CRGB::White, LAST_POLAR_RING-3, LAST_POLAR_RING-3};
-
-PolarLedEffect::SingleColourPolarData black1stOutsideRingPolarData = {CRGB::Black, LAST_POLAR_RING, LAST_POLAR_RING};
-PolarLedEffect::SingleColourPolarData black2ndOutsideRingPolarData = {CRGB::Black, LAST_POLAR_RING-1, LAST_POLAR_RING-1};
-PolarLedEffect::SingleColourPolarData black3rdOutsideRingPolarData = {CRGB::Black, LAST_POLAR_RING-2, LAST_POLAR_RING-2};
-PolarLedEffect::SingleColourPolarData black4thOutsideRingPolarData = {CRGB::Black, LAST_POLAR_RING-3, LAST_POLAR_RING-3};
-
-Gradient::GradientPolarData<> rgbGradientPolarData = {2, Gradient::GradientColourModeRGB, 3, new CRGB[3] {CRGB::Red, CRGB::Lime, CRGB::Blue}, FIRST_POLAR_RING, LAST_POLAR_RING};
-Gradient::GradientPolarData<> retroGradientPolarData = {2, Gradient::GradientColourModeRGB, 4, new CRGB[4] {CRGB::DeepSkyBlue, CRGB::DarkViolet, CRGB::LightCyan, CRGB::Lavender}, FIRST_POLAR_RING, LAST_POLAR_RING};
-Gradient::GradientPolarData<CHSV> retroGradientPolarDataHSV = {2, Gradient::GradientColourModeHSVSpectrum, 4, new CHSV[4] {CHSV(135, 200, 255), CHSV(210, 255, 255), CHSV(135, 20, 255), CHSV(210, 20, 255)}, FIRST_POLAR_RING, LAST_POLAR_RING};
-Gradient::GradientPolarData<> solarGradientPolarData = {2, Gradient::GradientColourModeRGB, 3, new CRGB[3] {CRGB::Yellow, CRGB::Yellow, CRGB::DarkOrange}, FIRST_POLAR_RING, LAST_POLAR_RING};
-
-NoiseEffect::NoiseEffectPolarData<> retroLavaLampNoisePolarData = {NoiseEffect::NoiseEffectColourModeRGB, {CRGB::DeepSkyBlue, CRGB::DarkViolet}, false, 150, 150, FIRST_POLAR_RING, LAST_POLAR_RING};
-NoiseEffect::NoiseEffectPolarData<> sparkleNoisePolarData = {NoiseEffect::NoiseEffectColourModeRGB, {CRGB::White, CRGB::Black}, false, 180, 3000, FIRST_POLAR_RING, LAST_POLAR_RING};
-
-TextEffect::TextEffectPolarData threeTextPolarData = {1, "3", {CRGB::White, CRGB::Black}, true, FIRST_POLAR_RING, LAST_POLAR_RING};
-TextEffect::TextEffectPolarData twoTextPolarData = {1, "2", {CRGB::White, CRGB::Black}, true, FIRST_POLAR_RING, LAST_POLAR_RING};
-TextEffect::TextEffectPolarData oneTextPolarData = {1, "1", {CRGB::White, CRGB::Black}, true, FIRST_POLAR_RING, LAST_POLAR_RING};
-TextEffect::TextEffectPolarData zeroTextPolarData = {1, "0", {CRGB::Lime, CRGB::Black}, true, FIRST_POLAR_RING, LAST_POLAR_RING};
-TextEffect::TextEffectPolarData helloTextPolarData = {5, "Hello", {CRGB::White, CRGB::Black}, true, FIRST_POLAR_RING, LAST_POLAR_RING};
-
+PolarLedEffect::MultiColourPolarData rgbPolarData = {3, new CRGB[3] {CRGB::Red, CRGB::Lime, CRGB::Blue}, CRGB::Black, true, FIRST_POLAR_RING, LAST_POLAR_RING};
 
 struct EffectListEntry {
   LedEffect *effect;
@@ -84,66 +53,75 @@ struct EffectListEntry {
 };
 
 EffectListEntry effListBG[] = {
-  {&defaultCircleWipe, &redPolarData},                         // 4s of circle wipes (RGBW with text overlaid)
-  {&clearPixels, &redColourData},
-  {&defaultCircleWipe, &greenPolarData},
-  {&clearPixels, &greenColourData},
-  {&defaultCircleWipe, &bluePolarData},
-  {&clearPixels, &blueColourData},
-  {&defaultCircleWipe, &whitePolarData},
-  {&clearPixels, &whiteColourData},
-  
-  {&defaultCircleZoom, &redPolarData},                         // 4s of circle zooms (RGBW)
+  // 4s of circle wipes (RGBW with text overlaid)
+  // (use filled BG colours to cover old text)
+  {&defaultCircleWipe, new PolarLedEffect::SingleColourPolarData {CRGB::Red, CRGB::Black, false, FIRST_POLAR_RING, LAST_POLAR_RING}},
+  {&defaultCircleWipe, new PolarLedEffect::SingleColourPolarData {CRGB::Lime, CRGB::Red, false, FIRST_POLAR_RING, LAST_POLAR_RING}},
+  {&defaultCircleWipe, new PolarLedEffect::SingleColourPolarData {CRGB::Blue, CRGB::Lime, false, FIRST_POLAR_RING, LAST_POLAR_RING}},
+  {&defaultCircleWipe, new PolarLedEffect::SingleColourPolarData {CRGB::White, CRGB::Blue, false, FIRST_POLAR_RING, LAST_POLAR_RING}},
+
+  // 4s of circle zooms (RGBW)
+  {&defaultCircleZoom, &redPolarData},
   {&defaultCircleZoom, &greenPolarData},
   {&defaultCircleZoom, &bluePolarData},
   {&defaultCircleZoom, &whitePolarData},
-  
-  {&defaultMultiCircleWipe, &rgbPolarData},                    // 2s for multi-wipe into spinner (RGB)
+
+  // 2s for multi-wipe into spinner (RGB)
+  {&defaultMultiCircleWipe, &rgbPolarData},
   {&defaultSpinner, &rgbPolarData},
+
+  // 1s transition to black
+  {&defaultCircleZoomReversed, &blackPolarData},
+
+  // 8s outer ring fill+unfill
+  {&defaultCircleWipe, new PolarLedEffect::SingleColourPolarData {CRGB::Red, CRGB::Black, true, LAST_POLAR_RING, LAST_POLAR_RING}},
+  {&defaultCircleWipe, new PolarLedEffect::SingleColourPolarData {CRGB::Lime, CRGB::Black, true, LAST_POLAR_RING-1, LAST_POLAR_RING-1}},
+  {&defaultCircleWipe, new PolarLedEffect::SingleColourPolarData {CRGB::Blue, CRGB::Black, true, LAST_POLAR_RING-2, LAST_POLAR_RING-2}},
+  {&defaultCircleWipe, new PolarLedEffect::SingleColourPolarData {CRGB::White, CRGB::Black, true, LAST_POLAR_RING-3, LAST_POLAR_RING-3}},
+  {&defaultCircleWipeReversed, new PolarLedEffect::SingleColourPolarData {CRGB::Black, CRGB::Black, true, LAST_POLAR_RING, LAST_POLAR_RING}},
+  {&defaultCircleWipeReversed, new PolarLedEffect::SingleColourPolarData {CRGB::Black, CRGB::Black, true, LAST_POLAR_RING-1, LAST_POLAR_RING-1}},
+  {&defaultCircleWipeReversed, new PolarLedEffect::SingleColourPolarData {CRGB::Black, CRGB::Black, true, LAST_POLAR_RING-2, LAST_POLAR_RING-2}},
+  {&defaultCircleWipeReversed, new PolarLedEffect::SingleColourPolarData {CRGB::Black, CRGB::Black, true, LAST_POLAR_RING-3, LAST_POLAR_RING-3}},
+
+  // 5s hello text
+  {&longTextEffect, new TextEffect::TextEffectPolarData {8, " Hello! ", CRGB::White, CRGB::Black, false, FIRST_POLAR_RING, LAST_POLAR_RING}},
   
-  {&defaultCircleZoomReversed, &blackPolarData},               // 1s transition to black
-  
-  {&defaultCircleWipe, &red1stOutsideRingPolarData},           // 8s outer ring fill+unfill
-  {&defaultCircleWipe, &green2ndOutsideRingPolarData},
-  {&defaultCircleWipe, &blue3rdOutsideRingPolarData},
-  {&defaultCircleWipe, &white4thOutsideRingPolarData},
-  {&defaultCircleWipeReversed, &black1stOutsideRingPolarData},
-  {&defaultCircleWipeReversed, &black2ndOutsideRingPolarData},
-  {&defaultCircleWipeReversed, &black3rdOutsideRingPolarData},
-  {&defaultCircleWipeReversed, &black4thOutsideRingPolarData},
-  
-  {&defaultGradient, &rgbGradientPolarData},                   // 5s rainbow (RGB) gradient with text
-  
-  //{&defaultGradient, &retroGradientPolarData},                     // 5s retro gradient, 5s solar gradient
-  {&defaultGradient, &retroGradientPolarDataHSV},
-  {&defaultGradient, &solarGradientPolarData},
-  
-  {&defaultNoiseEffect, &retroLavaLampNoisePolarData},         // 5s lava lamp, 5s sparkle
-  {&defaultNoiseEffect, &sparkleNoisePolarData},
+  // 5s rainbow (RGB) gradient
+  {&defaultGradient, new Gradient::GradientPolarData<> {2, Gradient::GradientColourModeRGB, 3, new CRGB[3] {CRGB::Red, CRGB::Lime, CRGB::Blue}, FIRST_POLAR_RING, LAST_POLAR_RING}},
+
+  // 5s retro gradient, 5s solar gradient
+  //{&defaultGradient, new Gradient::GradientPolarData<> {2, Gradient::GradientColourModeRGB, 4, new CRGB[4] {CRGB::DeepSkyBlue, CRGB::DarkViolet, CRGB::LightCyan, CRGB::Lavender}, FIRST_POLAR_RING, LAST_POLAR_RING}},
+  {&defaultGradient, new Gradient::GradientPolarData<CHSV> {2, Gradient::GradientColourModeHSVSpectrum, 4, new CHSV[4] {CHSV(135, 200, 255), CHSV(210, 255, 255), CHSV(135, 20, 255), CHSV(210, 20, 255)}, FIRST_POLAR_RING, LAST_POLAR_RING}},
+  {&defaultGradient, new Gradient::GradientPolarData<> {2, Gradient::GradientColourModeRGB, 3, new CRGB[3] {CRGB::Yellow, CRGB::Yellow, CRGB::DarkOrange}, FIRST_POLAR_RING, LAST_POLAR_RING}},
+
+  // 5s lava lamp, 5s sparkle
+  {&defaultNoiseEffect, new NoiseEffect::NoiseEffectPolarData<> {NoiseEffect::NoiseEffectColourModeRGB, CRGB::DeepSkyBlue, CRGB::DarkViolet, false, 150, 150, FIRST_POLAR_RING, LAST_POLAR_RING}},
+  {&defaultNoiseEffect, new NoiseEffect::NoiseEffectPolarData<> {NoiseEffect::NoiseEffectColourModeRGB, CRGB::White, CRGB::Black, false, 180, 3000, FIRST_POLAR_RING, LAST_POLAR_RING}},
 };
 unsigned int curEffectBG = 0;
 
 EffectListEntry effListFG[] = {
-  {&defaultTextEffect, &threeTextPolarData},                   // 4s of circle wipes (RGBW with text overlaid)
-  {&clearPixels, &redColourData},
-  {&defaultTextEffect, &twoTextPolarData},
-  {&clearPixels, &greenColourData},
-  {&defaultTextEffect, &oneTextPolarData},
-  {&clearPixels, &blueColourData},
-  {&defaultTextEffect, &zeroTextPolarData},
-  {&clearPixels, &whiteColourData},
-  
-  {&nullEffect, NULL},                                         // 4s of circle zooms (RGBW)
+  // 4s of circle wipes (RGBW with text overlaid)
+  {&defaultTextEffect, new TextEffect::TextEffectPolarData {1, "3", CRGB::White, CRGB::Black, true, FIRST_POLAR_RING, LAST_POLAR_RING}},
+  {&defaultTextEffect, new TextEffect::TextEffectPolarData {1, "2", CRGB::White, CRGB::Black, true, FIRST_POLAR_RING, LAST_POLAR_RING}},
+  {&defaultTextEffect, new TextEffect::TextEffectPolarData {1, "1", CRGB::White, CRGB::Black, true, FIRST_POLAR_RING, LAST_POLAR_RING}},
+  {&defaultTextEffect, new TextEffect::TextEffectPolarData {1, "0", CRGB::Lime, CRGB::Black, true, FIRST_POLAR_RING, LAST_POLAR_RING}},
+
+  // 4s of circle zooms (RGBW)
   {&nullEffect, NULL},
   {&nullEffect, NULL},
   {&nullEffect, NULL},
-  
-  {&nullEffect, NULL},                                         // 2s for multi-wipe into spinner (RGB)
   {&nullEffect, NULL},
-  
-  {&nullEffect, NULL},                                         // 1s transition to black
-  
-  {&nullEffect, NULL},                                         // 8s outer ring fill+unfill
+
+  // 2s for multi-wipe into spinner (RGB)
+  {&nullEffect, NULL},
+  {&nullEffect, NULL},
+
+  // 1s transition to black
+  {&nullEffect, NULL},
+
+  // 8s outer ring fill+unfill
+  {&nullEffect, NULL},
   {&nullEffect, NULL},
   {&nullEffect, NULL},
   {&nullEffect, NULL},
@@ -152,12 +130,18 @@ EffectListEntry effListFG[] = {
   {&nullEffect, NULL},
   {&nullEffect, NULL},
 
-  {&longTextEffect, &helloTextPolarData},                      // 5s rainbow (RGB) gradient with text
-
-  {&longNullEffect, NULL},                                     // 5s retro gradient, 5s solar gradient
+  // 5s hello text
   {&longNullEffect, NULL},
-  
-  {&longNullEffect, NULL},                                     // 5s lava lamp, 5s sparkle
+
+  // 5s rainbow (RGB) gradient
+  {&longNullEffect, NULL},
+
+  // 5s retro gradient, 5s solar gradient
+  {&longNullEffect, NULL},
+  {&longNullEffect, NULL},
+
+  // 5s lava lamp, 5s sparkle
+  {&longNullEffect, NULL},
   {&longNullEffect, NULL},
 };
 unsigned int curEffectFG = 0;
@@ -180,6 +164,9 @@ void loop() {
   EffectListEntry &eff_bg = effListBG[curEffectBG];
   EffectListEntry &eff_fg = effListFG[curEffectFG];
 
+  // force_reset_fg is used to resync FG to BG when the full cycle repeats
+  // minor frame timing differences aren't the end of the world, but this will make sure they don't grow too much
+  // I should probably just build single list of effects to run simultaneously though
   static bool force_reset_fg = false;
 
   // returns true when effect is complete (false while still running)

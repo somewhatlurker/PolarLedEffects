@@ -7,11 +7,15 @@ class LedEffect {
 public:
     struct SingleColourData {
         CRGB colour;
+        CRGB bgColour;
+        bool transparentBg;
     };
 
     struct MultiColourData {
         unsigned int nColours;
         CRGB *colours;
+        CRGB bgColour;
+        bool transparentBg;
     };
 
 private:

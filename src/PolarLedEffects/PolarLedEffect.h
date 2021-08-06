@@ -9,6 +9,8 @@ class PolarLedEffect : public LedEffect {
 public:
     struct SingleColourPolarData {
         CRGB colour;
+        CRGB bgColour;
+        bool transparentBg;
         unsigned int firstRing;
         unsigned int lastRing;
     };
@@ -16,6 +18,8 @@ public:
     struct MultiColourPolarData {
         unsigned int nColours;
         CRGB *colours;
+        CRGB bgColour;
+        bool transparentBg;
         unsigned int firstRing;
         unsigned int lastRing;
     };

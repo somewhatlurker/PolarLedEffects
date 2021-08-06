@@ -17,6 +17,9 @@ public:
         
         float t = easedTime();
         unsigned int endDegrees = (unsigned int)(t * 360.0f);
+
+        if (!d->transparentBg)
+            fillAllInArcAndDistance(leds, led_count, d->bgColour, endDegrees, 360, d->firstRing, d->lastRing);
         fillAllInArcAndDistance(leds, led_count, d->colour, 0, endDegrees, d->firstRing, d->lastRing);
         
         if (t < 1.0f)
