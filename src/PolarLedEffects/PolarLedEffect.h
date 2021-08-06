@@ -5,6 +5,10 @@
 
 #include "LedEffect.h"
 
+#ifndef POLAR_AA_SAMPLES
+#define POLAR_AA_SAMPLES 1
+#endif
+
 class PolarLedEffect : public LedEffect {
 public:
     struct SingleColourPolarData {
@@ -34,13 +38,11 @@ protected:
         return out;
     }
     
-    inline bool isLedInArc(unsigned int ledPos, unsigned int ledSegments, unsigned int degStart, unsigned int degEnd) {
-        unsigned int ledDegrees = 360 * ledPos / ledSegments;
-        
+    inline bool isAngleInArc(unsigned int angle, unsigned int degStart, unsigned int degEnd) {        
         if (degEnd >= degStart)
-            return (ledDegrees >= degStart) && (ledDegrees <= degEnd);
+            return (angle >= degStart) && (angle <= degEnd);
         else
-            return (ledDegrees >= degStart) || (ledDegrees <= degEnd);
+            return (angle >= degStart) || (angle <= degEnd);
     }
 
     typedef CRGB (*PolarSampler)(unsigned int deg, unsigned int ring, CRGB old_colour, void *data);
@@ -64,9 +66,40 @@ protected:
             
             // we are in the distance to be filled
             for (unsigned int i = 0; i < ring_size; i++) {
-                if (isLedInArc(i, ring_size, degStart, degEnd)) {
-                    leds[led_n] = sampler(360 * i / ring_size, ring_n, leds[led_n], userdata);
+#if POLAR_AA_SAMPLES <= 1
+                unsigned int ledDegrees = 360 * i / ring_size;
+
+                if (isAngleInArc(ledDegrees, degStart, degEnd)) {
+                    leds[led_n] = sampler(ledDegrees, ring_n, leds[led_n], userdata);
                 }
+#else
+                unsigned int angleStep = (360 / POLAR_AA_SAMPLES) / ring_size;
+
+                int ledDegrees = 360 * i / ring_size - angleStep / POLAR_AA_SAMPLES;
+
+                unsigned int r_total = 0;
+                unsigned int g_total = 0;
+                unsigned int b_total = 0;
+
+                for (int j = 0; j < POLAR_AA_SAMPLES; j++) {
+                  if (isAngleInArc(ledDegrees + j*angleStep, degStart, degEnd)) {
+                      int splDegrees = ledDegrees + j*angleStep;
+                      if (splDegrees < 0) splDegrees += 360;
+
+                      CRGB res = sampler(splDegrees, ring_n, leds[led_n], userdata);
+                      r_total += res.r;
+                      g_total += res.g;
+                      b_total += res.b;
+                  }
+                  else {
+                      r_total += leds[led_n].r;
+                      g_total += leds[led_n].g;
+                      b_total += leds[led_n].b;
+                  }
+                }
+
+                leds[led_n] = CRGB(r_total/POLAR_AA_SAMPLES, g_total/POLAR_AA_SAMPLES, b_total/POLAR_AA_SAMPLES);
+#endif
                 led_n++;
             }
         }
