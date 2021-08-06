@@ -196,9 +196,15 @@ void setup() {
 void loop() {
   EffectListEntry &eff = effList[curEffect];
 
+  // unsigned long pre_render_micros = micros();
+
   // UpdateLeds returns true when effect is complete (false while still running)
   bool bgUpdateRes = eff.bgEffect->UpdateLeds(leds, NUM_LEDS, eff.bgData);
   bool fgUpdateRes = eff.fgEffect->UpdateLeds(leds, NUM_LEDS, eff.fgData);
+
+  // Serial.print("Render Time: ");
+  // Serial.print(micros() - pre_render_micros);
+  // Serial.println("us");
 
   // if BG and FG effect are both complete, increment curEffect and mark start of next effects
   if (bgUpdateRes && fgUpdateRes) {
