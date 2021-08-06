@@ -6,7 +6,7 @@
 #define LED_BRIGHTNESS 8
 #define LED_CURRENT_LIMIT 300
 
-#define ANIM_FPS 120
+#define ANIM_FPS 240
 #define ANIM_FRAME_MICROS (1000000 / ANIM_FPS)
 
 #include <FastLED.h>
